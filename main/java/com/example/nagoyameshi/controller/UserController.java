@@ -63,5 +63,19 @@ public class UserController {
         redirectAttributes.addFlashAttribute("successMessage", "会員情報を編集しました。");
         
         return "redirect:/user";
+    }  
+    @PostMapping("/delete")
+    public String delete(@ModelAttribute @Validated UserEditForm userEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        // メールアドレスが変更されており、かつ登録済みであれば、BindingResultオブジェクトにエラー内容を追加する
+        
+        
+        if (bindingResult.hasErrors()) {
+            return "user/delete";
+        }
+        
+        userService.delete(userEditForm);
+        redirectAttributes.addFlashAttribute("successMessage", "会員情報を削除しました。");
+        
+        return "redirect:/user";
     }    
 }

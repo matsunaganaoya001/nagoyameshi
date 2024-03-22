@@ -56,6 +56,13 @@ public class UserService {
         
         userRepository.save(user);
     }    
+    
+    @Transactional
+    public void delete(UserEditForm userEditForm) {
+        User user = userRepository.getReferenceById(userEditForm.getId());
+                
+        userRepository.delete(user);
+    }  
     // メールアドレスが登録済みかどうかをチェックする
     public boolean isEmailRegistered(String email) {
         User user = userRepository.findByEmail(email);  

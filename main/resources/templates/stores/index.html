@@ -152,8 +152,8 @@
                              <div class="mb-3" th:each="store : ${storePage}">
                                  <a th:href="@{/stores/__${store.getId()}__}" class="link-dark nagoyameshi-card-link">
                                      <div class="card h-100"> 
-										             <!-- お気に入りボタンを追加 -->
-            <button class="btn btn-primary btn-favorite" onclick="toggleFavorite(this, '__${store.getId()}__')">お気に入り</button>  
+<!--										              お気に入りボタンを追加 -->
+<!--            <button class="btn btn-primary btn-favorite" onclick="toggleFavorite(this, '__${store.getId()}__')">お気に入り</button>  -->
                                          <div class="row g-0">
                                              <div class="col-md-4">                                                                                
                                                  <img th:if="${store.getImageName()}" th:src="@{/storage/__${store.getImageName()}__}" class="card-img-top nagoyameshi-horizontal-card-image" alt="店舗画像">                                                     
@@ -174,9 +174,9 @@
                                                          <small class="text-muted" th:text="${store.getAddress()}"></small>                                                      
                                                      </p>   
                                                                                                                                                                                                                                     
-                                                     <p class="card-text">
-                                                         <span th:text="${#numbers.formatInteger(store.getPrice(), 1, 'COMMA') + '円 / 泊'}"></span>
-                                                     </p>                                    
+<!--                                                     <p class="card-text">-->
+<!--                                                         <span th:text="${#numbers.formatInteger(store.getPrice(), 1, 'COMMA') + '円 / 泊'}"></span>-->
+<!--                                                     </p>                                    -->
                                                  </div>
                                              </div>
                                          </div>
@@ -184,12 +184,12 @@
                                  </a>            
                              </div>  
                              
-                             <script>
-    function toggleFavorite(button, storeId) {
-        // ここにお気に入りボタンの処理を追加
-        alert('お気に入りボタンがクリックされました！店舗ID: ' + storeId);
-    }
-</script>                                                                                     
+<!--                             <script>-->
+<!--    function toggleFavorite(button, storeId) {-->
+<!--        // ここにお気に入りボタンの処理を追加-->
+<!--        alert('お気に入りボタンがクリックされました！店舗ID: ' + storeId);-->
+<!--    }-->
+<!--</script>                                                                                     -->
              
                              <!-- ページネーション -->
                              <div th:if="${storePage.getTotalPages() > 1}" class="d-flex justify-content-center">

@@ -19,40 +19,65 @@
                              
                              <h1 class="mb-4 text-center">会員一覧</h1>   
                              
-                             <div class="d-flex justify-content-between align-items-end">
-                                 <form method="get" th:action="@{/admin/users}" class="mb-3">
-                                     <div class="input-group">
-                                         <input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="氏名・フリガナ">
-                                         <button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button> 
-                                     </div>               
-                                 </form>                                                                                                
-                             </div>                                                         
+                           <div class="d-flex justify-content-between align-items-end">
+    <form method="get" th:action="@{/admin/users}" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="氏名・フリガナ">
+            <button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button> 
+        </div>               
+    </form>                                                                                                
+</div>                                                          
                  
-                             <div th:if="${successMessage}" class="alert alert-info">
-                                 <span th:text="${successMessage}"></span>
-                             </div>   
-                             
-                             <table class="table">
-                                 <thead>
-                                     <tr>
-                                         <th scope="col">ID</th>
-                                         <th scope="col">氏名</th>
-                                         <th scope="col">フリガナ</th>
-                                         <th scope="col">メールアドレス</th>                                        
-                                         <th scope="col"></th>
-                                     </tr>
-                                 </thead>   
-                                 <tbody>                                                     
-                                     <tr th:each="user : ${userPage}">
-                                         <td th:text="${user.getId()}"></td>
-                                         <td th:text="${user.getName()}"></td>
-                                         <td th:text="${user.getFurigana()}"></td>
-                                         <td th:text="${user.getEmail()}"></td>
-                                         <td><a th:href="@{/admin/users/__${user.getId()}__}">詳細</a></td>                                                                                
-                                     </tr>                                      
-                                 </tbody>
-                             </table>  
-                             
+<div th:if="${successMessage}" class="alert alert-info">
+    <span th:text="${successMessage}"></span>
+</div>   
+
+<div class="table-responsive">
+    <table class="table">
+        <!-- テーブルのヘッダー部分 -->
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">氏名</th>
+                <th scope="col">フリガナ</th>
+                <th scope="col">メールアドレス</th>                                        
+                <th scope="col"></th>
+                <th scope="col"></th> 
+            </tr>
+        </thead>   
+        <!-- テーブルのボディ部分 -->
+        <tbody>                                                     
+            <tr th:each="user : ${userPage}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getName()}"></td>
+                <td th:text="${user.getFurigana()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+                <td><a th:href="@{/admin/users/__${user.getId()}__}">詳細</a></td>  
+                <td>
+                    <a href="#" class="nagoyameshi-link-danger" data-bs-toggle="modal" th:data-bs-target="${'#deleteUserModal' + user.getId()}">削除</a>
+                    
+                    <!-- 削除用モーダル -->
+                    <div class="modal fade" th:id="${'deleteUserModal' + user.getId()}" tabindex="-1" th:aria-labelledby="${'deleteUserModalLabel' + user.getId()}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" th:id="${'deleteUserModalLabel' + user.getId()}" th:text="${user.getName() + 'を削除してもよろしいですか？'}"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form method="post" th:action="@{/admin/users/__${user.getId()}__/delete}">
+                                        <button type="submit" class="btn nagoyameshi-btn-danger text-white shadow-sm">削除</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </td>  
+            </tr>                                      
+        </tbody>
+    </table> 
+</div>
+              
                              <!-- ページネーション -->
                              <div th:if="${userPage.getTotalPages() > 1}" class="d-flex justify-content-center">
                                  <nav aria-label="会員一覧ページ">

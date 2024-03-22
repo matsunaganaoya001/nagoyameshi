@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS stores (
      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      FOREIGN KEY (user_id) REFERENCES users (id) 
  );
- DROP TABLE reservations; 
+ DROP TABLE IF  EXISTS reservations; 
  CREATE TABLE IF NOT EXISTS reservations (
      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
      store_id INT NOT NULL,
@@ -57,4 +57,5 @@ CREATE TABLE IF NOT EXISTS stores (
      FOREIGN KEY (store_id) REFERENCES stores (id),
      FOREIGN KEY (user_id) REFERENCES users (id)
  );
+ 
  
